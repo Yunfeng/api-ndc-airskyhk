@@ -36,8 +36,10 @@ public class FarePriceType {
 
   private double totalTaxes;
 
-
-  private FareRule fareRule; // FareRule 运价规则（参考 FareRule 说明）
+  /**
+   * 运价规则
+   */
+  private FareRule fareRule;
   private double discountAmount; // number 折扣价
   private double totalFee; // number 代理费
 

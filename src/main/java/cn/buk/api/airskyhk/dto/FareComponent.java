@@ -19,6 +19,7 @@ public class FareComponent {
    */
   private List<FarePriceType> farePriceTypes;
 
+
   public String getOfferId() {
     return offerId;
   }

@@ -1,9 +1,6 @@
 package cn.buk.api.airskyhk.service;
 
-import cn.buk.api.airskyhk.dto.AirShoppingRequest;
-import cn.buk.api.airskyhk.dto.AirShoppingResponse;
-import cn.buk.api.airskyhk.dto.CouponShoppingRequest;
-import cn.buk.api.airskyhk.dto.CouponShoppingResponse;
+import cn.buk.api.airskyhk.dto.*;
 import cn.buk.api.airskyhk.util.HttpUtil;
 import cn.buk.api.airskyhk.util.JsonUtil;
 import cn.buk.api.airskyhk.util.TokenUtil;
@@ -95,5 +92,28 @@ public class NdcServiceImpl implements NdcService {
 
 
     return convertJson2Obj(jsonStr, CouponShoppingResponse.class);
+  }
+
+  @Override
+  public OfferPriceResponse searchOfferPrice(OfferPriceRequest request) {
+    final String echoToken = TokenUtil.generateEchoToken(this.uid, this.privateKey);
+    request.getPayloadAttributes().setEchoTokenText(echoToken);
+
+    List<NameValuePair> nvps = new ArrayList<>();
+    nvps.add(new BasicNameValuePair("uid", this.uid));
+    nvps.add(new BasicNameValuePair("token", echoToken));
+    nvps.add(new BasicNameValuePair("zone", "dom"));
+    nvps.add(new BasicNameValuePair("airline", "cz"));
+    nvps.add(new BasicNameValuePair("channel", "ndc"));
+
+    final String postStr = JsonUtil.toJSONString(request);
+    System.out.println(postStr);
+
+
+    String jsonStr = HttpUtil.postUrl(url + "/offerPrice", postStr, nvps);
+    System.out.println(jsonStr);
+
+
+    return convertJson2Obj(jsonStr, OfferPriceResponse.class);
   }
 }

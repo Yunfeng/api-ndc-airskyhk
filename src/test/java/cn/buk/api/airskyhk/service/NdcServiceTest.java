@@ -40,4 +40,14 @@ public class NdcServiceTest extends BaseTest {
     assertEquals("SUCCESS", rs.getStatus().getStatus());
   }
 
+  @Test
+  void test_searchOfferPrice() {
+    var rq = createOfferPriceRequest(this.uid, this.privateKey);
+
+    var rs = service.searchOfferPrice(rq);
+
+    assertNotNull(rs);
+    assertEquals("SUCCESS", rs.getStatus().getStatus());
+  }
+
 }

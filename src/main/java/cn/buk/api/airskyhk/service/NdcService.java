@@ -1,9 +1,6 @@
 package cn.buk.api.airskyhk.service;
 
-import cn.buk.api.airskyhk.dto.AirShoppingRequest;
-import cn.buk.api.airskyhk.dto.AirShoppingResponse;
-import cn.buk.api.airskyhk.dto.CouponShoppingRequest;
-import cn.buk.api.airskyhk.dto.CouponShoppingResponse;
+import cn.buk.api.airskyhk.dto.*;
 
 public interface NdcService {
 
@@ -20,4 +17,11 @@ public interface NdcService {
    * @return
    */
   CouponShoppingResponse searchCoupon(CouponShoppingRequest request);
+
+  /**
+   * 价格查询
+   * @param request
+   * @return
+   */
+  OfferPriceResponse searchOfferPrice(OfferPriceRequest request);
 }

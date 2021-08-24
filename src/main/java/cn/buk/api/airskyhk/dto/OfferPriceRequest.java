@@ -1,14 +1,14 @@
 package cn.buk.api.airskyhk.dto;
 
-public class OfferPriceRequest {
+public class OfferPriceRequest extends BaseRequest {
 
-//  payloadAttributes PayloadAttributes 基础属性（参考 PayloadAttributes 说明）
-//  memberInfo MemberInfo 账号信息（参考 MemberInfo 说明）
-//  request BaseOfferPriceRequest 价格确认请求（参考 BaseOfferPriceRequest）
+  private BaseOfferPriceRequest request = new BaseOfferPriceRequest();
 
-  private PayloadAttributes payloadAttributes;
+  public BaseOfferPriceRequest getRequest() {
+    return request;
+  }
 
-  private MemberInfo memberInfo;
-
-  private BaseOfferPriceRequest request;
+  public void setRequest(BaseOfferPriceRequest request) {
+    this.request = request;
+  }
 }

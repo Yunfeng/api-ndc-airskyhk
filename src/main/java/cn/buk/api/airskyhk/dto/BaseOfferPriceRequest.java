@@ -1,5 +1,8 @@
 package cn.buk.api.airskyhk.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class BaseOfferPriceRequest {
@@ -32,5 +35,63 @@ public class BaseOfferPriceRequest {
   /**
    * 航班查询返回 ID
    */
+  @JsonProperty("shoppingResponseID")
   private String shoppingResponseId;
+
+  public String getPnr() {
+    return pnr;
+  }
+
+  public void setPnr(String pnr) {
+    this.pnr = pnr;
+  }
+
+  public boolean isDirectOnly() {
+    return directOnly;
+  }
+
+  public void setDirectOnly(boolean directOnly) {
+    this.directOnly = directOnly;
+  }
+
+  public List<String> getOfferItemIds() {
+    if (offerItemIds == null) {
+      offerItemIds = new ArrayList<>();
+    }
+    return offerItemIds;
+  }
+
+  public void setOfferItemIds(List<String> offerItemIds) {
+    this.offerItemIds = offerItemIds;
+  }
+
+  public List<FlightInfo> getFlights() {
+    if (flights == null) {
+      flights = new ArrayList<>();
+    }
+    return flights;
+  }
+
+  public void setFlights(List<FlightInfo> flights) {
+    this.flights = flights;
+  }
+
+  public List<PaxQuery> getTravelers() {
+    if (travelers == null) {
+      travelers = new ArrayList<>();
+    }
+    return travelers;
+  }
+
+  public void setTravelers(List<PaxQuery> travelers) {
+    this.travelers = travelers;
+  }
+
+  public String getShoppingResponseId() {
+    return shoppingResponseId;
+  }
+
+  public void setShoppingResponseId(String shoppingResponseId) {
+    this.shoppingResponseId = shoppingResponseId;
+  }
 }
