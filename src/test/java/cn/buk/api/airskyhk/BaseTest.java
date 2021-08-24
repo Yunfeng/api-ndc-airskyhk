@@ -97,4 +97,46 @@ public class BaseTest {
 
     return rq;
   }
+
+  public static OrderCreateRequest createOrderCreateRequest(final String uid, final String privateKey) {
+    var rq = new OrderCreateRequest();
+
+    rq.getMemberInfo().setAccountNumber("13000000000");
+    rq.getMemberInfo().setAgencyId(uid);
+
+    rq.getPayloadAttributes().setAirlineCode("CZ");
+    rq.getPayloadAttributes().setChannel("NDC");
+    rq.getPayloadAttributes().setSystem("B2B");
+    rq.getPayloadAttributes().setTimestamp(DateUtil.getCurDateTime());
+    rq.getPayloadAttributes().setTransactionId("999");
+
+    ContactInfo contactInfo = new ContactInfo();
+//    contactInfo.setContactName("张/三");
+    contactInfo.setContactName("zhang/san");
+    contactInfo.setMobile("13000000000");
+    contactInfo.setPhoneNumber("88889999");
+    contactInfo.setEmail("aa@aa.com");
+    contactInfo.setSurname("江疏影");
+    rq.getRequest().getContacts().add(contactInfo);
+
+    rq.getRequest().getOfferItemIds().add("OII1_ADT_seg1");
+
+    PassengerInfo psgInfo = new PassengerInfo();
+    psgInfo.setSurname("江疏影");
+    psgInfo.setGender("Male");
+    psgInfo.setBirthdate("1975-01-01");
+    psgInfo.setIdentityType("ID");
+//    psgInfo.setIdentityNumber("360403197501012710");
+    psgInfo.setIdentityNumber("360403197501232710");
+    psgInfo.setPassengerType("ADT");
+//    psgInfo.setMobile("15618206323");
+    rq.getRequest().getPassengers().add(psgInfo);
+
+    rq.getRequest().setTotalAmount(1360);
+    rq.getRequest().setTotalTax(80);
+
+    rq.getRequest().setShoppingResponseId("9d4e0192-9e42-43ba-afc7-325634b341cc");
+
+    return rq;
+  }
 }

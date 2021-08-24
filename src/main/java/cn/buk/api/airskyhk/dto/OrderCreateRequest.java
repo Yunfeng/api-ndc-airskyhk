@@ -1,13 +1,17 @@
 package cn.buk.api.airskyhk.dto;
 
-public class OrderCreateRequest {
-//  payloadAttributes PayloadAttributes 基础属性(参考 PayloadAttributes 说明)
-//  memberInfo MemberInfo 账号信息(参考 MemberInfo 说明)
-//  request BaseOrderCreateRequest  订单创建信息(参考 BaseOrderCreateRequest 说明)
+public class OrderCreateRequest extends BaseRequest {
 
-  private PayloadAttributes payloadAttributes;
+  /**
+   * 订单创建信息
+   */
+  private BaseOrderCreateRequest request = new BaseOrderCreateRequest();
 
-  private MemberInfo memberInfo;
+  public BaseOrderCreateRequest getRequest() {
+    return request;
+  }
 
-  private BaseOrderCreateRequest request;
+  public void setRequest(BaseOrderCreateRequest request) {
+    this.request = request;
+  }
 }

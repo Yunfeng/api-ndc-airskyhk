@@ -2,11 +2,13 @@ package cn.buk.api.airskyhk.service;
 
 import cn.buk.api.airskyhk.BaseTest;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@Disabled
 public class NdcServiceTest extends BaseTest {
 
   final String uid = "SHSYGJ2B";
@@ -45,6 +47,16 @@ public class NdcServiceTest extends BaseTest {
     var rq = createOfferPriceRequest(this.uid, this.privateKey);
 
     var rs = service.searchOfferPrice(rq);
+
+    assertNotNull(rs);
+    assertEquals("SUCCESS", rs.getStatus().getStatus());
+  }
+
+  @Test
+  void test_createOrder() {
+    var rq = createOrderCreateRequest(this.uid, this.privateKey);
+
+    var rs = service.createOrder(rq);
 
     assertNotNull(rs);
     assertEquals("SUCCESS", rs.getStatus().getStatus());

@@ -126,9 +126,8 @@ public class HttpUtil extends BaseHttpClient {
 
       if (headers != null) {
         for (var key : headers) {
-
           httpPost.addHeader(key.getName(), key.getValue().toUpperCase());
-          System.out.println("header " + key.getName() + ": " + key.getValue().toUpperCase());
+//          System.out.println("header " + key.getName() + ": " + key.getValue().toUpperCase());
         }
       }
 

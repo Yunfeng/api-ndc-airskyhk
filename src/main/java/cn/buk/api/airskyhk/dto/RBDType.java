@@ -2,12 +2,16 @@ package cn.buk.api.airskyhk.dto;
 
 public class RBDType {
 
-//  cabinTypeCode String 舱位
-//  seatsLeft Integer 航班剩余座位数
-
+  /**
+   * 舱位
+   */
   private String cabinTypeCode;
 
+  /**
+   * 航班剩余座位数
+   */
   private int seatsLeft;
+
 
   public String getCabinTypeCode() {
     return cabinTypeCode;

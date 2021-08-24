@@ -24,4 +24,11 @@ public interface NdcService {
    * @return
    */
   OfferPriceResponse searchOfferPrice(OfferPriceRequest request);
+
+  /**
+   * 创建订单
+   * @param request
+   * @return
+   */
+  OrderViewResponse createOrder(OrderCreateRequest request);
 }

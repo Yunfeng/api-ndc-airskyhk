@@ -43,29 +43,41 @@ public class NdcServiceImpl implements NdcService {
     this.privateKey = token;
     this.url = url;
     this.isTestEvn = isTest;
+      this.isDebug = isTest;
   }
 
-  @Override
-  public AirShoppingResponse searchFlight(AirShoppingRequest request) {
-
+  private void generateEchoToken(PayloadAttributes payloadAttributes) {
     final String echoToken = TokenUtil.generateEchoToken(this.uid, this.privateKey);
-    request.getPayloadAttributes().setEchoTokenText(echoToken);
+    payloadAttributes.setEchoTokenText(echoToken);
+  }
 
+  private List<NameValuePair> createNameValuePairs(final String echoToken) {
     List<NameValuePair> nvps = new ArrayList<>();
+
     nvps.add(new BasicNameValuePair("uid", this.uid));
     nvps.add(new BasicNameValuePair("token", echoToken));
     nvps.add(new BasicNameValuePair("zone", "dom"));
     nvps.add(new BasicNameValuePair("airline", "cz"));
     nvps.add(new BasicNameValuePair("channel", "ndc"));
 
-    final String postStr = JsonUtil.toJSONString(request);
-    System.out.println(postStr);
+    return nvps;
+  }
 
+  @Override
+  public AirShoppingResponse searchFlight(AirShoppingRequest request) {
+
+    generateEchoToken(request.getPayloadAttributes());
+    List<NameValuePair> nvps = createNameValuePairs(request.getPayloadAttributes().getEchoTokenText());
+
+    final String postStr = JsonUtil.toJSONString(request);
+    if (isDebug) {
+      System.out.println(postStr);
+    }
 
     String jsonStr = HttpUtil.postUrl(url + "/airShopping", postStr, nvps);
-    System.out.println(jsonStr);
-
-
+    if (isDebug) {
+      System.out.println(jsonStr);
+    }
 
 
     return convertJson2Obj(jsonStr, AirShoppingResponse.class);
@@ -73,22 +85,19 @@ public class NdcServiceImpl implements NdcService {
 
   @Override
   public CouponShoppingResponse searchCoupon(CouponShoppingRequest request) {
-    final String echoToken = TokenUtil.generateEchoToken(this.uid, this.privateKey);
-    request.getPayloadAttributes().setEchoTokenText(echoToken);
-
-    List<NameValuePair> nvps = new ArrayList<>();
-    nvps.add(new BasicNameValuePair("uid", this.uid));
-    nvps.add(new BasicNameValuePair("token", echoToken));
-    nvps.add(new BasicNameValuePair("zone", "dom"));
-    nvps.add(new BasicNameValuePair("airline", "cz"));
-    nvps.add(new BasicNameValuePair("channel", "ndc"));
+    generateEchoToken(request.getPayloadAttributes());
+    List<NameValuePair> nvps = createNameValuePairs(request.getPayloadAttributes().getEchoTokenText());
 
     final String postStr = JsonUtil.toJSONString(request);
-    System.out.println(postStr);
+    if (isDebug) {
+      System.out.println(postStr);
+    }
 
 
     String jsonStr = HttpUtil.postUrl(url + "/couponShopping", postStr, nvps);
-
+    if (isDebug) {
+      System.out.println(jsonStr);
+    }
 
 
     return convertJson2Obj(jsonStr, CouponShoppingResponse.class);
@@ -96,24 +105,41 @@ public class NdcServiceImpl implements NdcService {
 
   @Override
   public OfferPriceResponse searchOfferPrice(OfferPriceRequest request) {
-    final String echoToken = TokenUtil.generateEchoToken(this.uid, this.privateKey);
-    request.getPayloadAttributes().setEchoTokenText(echoToken);
-
-    List<NameValuePair> nvps = new ArrayList<>();
-    nvps.add(new BasicNameValuePair("uid", this.uid));
-    nvps.add(new BasicNameValuePair("token", echoToken));
-    nvps.add(new BasicNameValuePair("zone", "dom"));
-    nvps.add(new BasicNameValuePair("airline", "cz"));
-    nvps.add(new BasicNameValuePair("channel", "ndc"));
+    generateEchoToken(request.getPayloadAttributes());
+    List<NameValuePair> nvps = createNameValuePairs(request.getPayloadAttributes().getEchoTokenText());
 
     final String postStr = JsonUtil.toJSONString(request);
-    System.out.println(postStr);
+    if (isDebug) {
+      System.out.println(postStr);
+    }
 
 
     String jsonStr = HttpUtil.postUrl(url + "/offerPrice", postStr, nvps);
-    System.out.println(jsonStr);
+    if (isDebug) {
+      System.out.println(jsonStr);
+    }
 
 
     return convertJson2Obj(jsonStr, OfferPriceResponse.class);
+  }
+
+  @Override
+  public OrderViewResponse createOrder(OrderCreateRequest request) {
+    generateEchoToken(request.getPayloadAttributes());
+    List<NameValuePair> nvps = createNameValuePairs(request.getPayloadAttributes().getEchoTokenText());
+
+    final String postStr = JsonUtil.toJSONString(request);
+    if (isDebug) {
+      System.out.println(postStr);
+    }
+
+
+    String jsonStr = HttpUtil.postUrl(url + "/orderCreate", postStr, nvps);
+    if (isDebug) {
+      System.out.println(jsonStr);
+    }
+
+
+    return convertJson2Obj(jsonStr, OrderViewResponse.class);
   }
 }
