@@ -4,7 +4,7 @@
   <groupId>cn.buk.api.ndc</groupId>
   <artifactId>api-ndc-airskyhk</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
 
   <name>api-ndc-airskyhk</name>
   <url>http://maven.apache.org</url>
